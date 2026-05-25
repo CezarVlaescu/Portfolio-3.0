@@ -50,7 +50,7 @@ export function HeroSection() {
             "
           >
             <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_18px_rgba(34,211,238,1)]" />
-            Frontend Developer · Building the Future
+            Developer · Building the Future
           </div>
 
           <h1
@@ -65,7 +65,7 @@ export function HeroSection() {
               xl:text-[82px]
             "
           >
-            Hi, I&apos;m <span className="neon-text">Cezar</span>
+            Hi, I&apos;m <span className="neon-text">Cezar Vlăescu</span>
           </h1>
 
           <p
