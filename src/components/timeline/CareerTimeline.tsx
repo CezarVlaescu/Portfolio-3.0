@@ -1,82 +1,234 @@
-import { useState } from 'react';
+import { type CSSProperties, useState } from 'react';
 import { motion } from 'motion/react';
 import { timelineItems } from '../../data/timeline';
+
+const timelineThemes = [
+  {
+    accent: '#a855f7',
+    accentSoft: 'rgba(168, 85, 247, 0.12)',
+    accentBorder: 'rgba(168, 85, 247, 0.48)',
+    accentGlow: 'rgba(168, 85, 247, 0.45)',
+  },
+  {
+    accent: '#38bdf8',
+    accentSoft: 'rgba(56, 189, 248, 0.11)',
+    accentBorder: 'rgba(56, 189, 248, 0.48)',
+    accentGlow: 'rgba(56, 189, 248, 0.42)',
+  },
+  {
+    accent: '#2dd4bf',
+    accentSoft: 'rgba(45, 212, 191, 0.11)',
+    accentBorder: 'rgba(45, 212, 191, 0.48)',
+    accentGlow: 'rgba(45, 212, 191, 0.42)',
+  },
+  {
+    accent: '#fb923c',
+    accentSoft: 'rgba(251, 146, 60, 0.11)',
+    accentBorder: 'rgba(251, 146, 60, 0.48)',
+    accentGlow: 'rgba(251, 146, 60, 0.42)',
+  },
+];
 
 export function CareerTimeline() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="timeline" className="border-b border-white/8 bg-black/15 py-20">
-      <div className="section-shell">
+    <section id="experience" className="section-screen border-b border-white/8 bg-black/15">
+      <div className="section-shell section-screen-inner">
         <p className="text-sm font-black uppercase tracking-[0.36em] text-violet-300">
           My Journey
         </p>
+
         <h2 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">
           Career Timeline
         </h2>
 
-        <div className="relative mt-16">
-          <motion.div
-            className="absolute left-0 right-0 top-[30px] h-px bg-gradient-to-r from-violet-500 via-cyan-400 to-orange-400"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, amount: 0.45 }}
-            transition={{ duration: 1.2 }}
-            style={{ transformOrigin: 'left' }}
-          />
+        {/* DESKTOP */}
+        <div className="relative mt-16 hidden lg:block">
+          <div className="grid grid-cols-[22px_repeat(4,minmax(0,1fr))_22px] gap-x-7 gap-y-4">
+            {/* line + end points */}
+            <div className="relative col-[1/7] row-[1] h-[72px]">
+              <motion.div
+                className="timeline-track absolute inset-x-0 top-1/2 -translate-y-1/2"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true, amount: 0.45 }}
+                transition={{ duration: 1.15 }}
+                style={{ transformOrigin: 'left' }}
+              />
 
-          <div className="relative grid gap-7 lg:grid-cols-4">
+              <span className="timeline-cap absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+              <span className="timeline-cap absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2" />
+            </div>
+
             {timelineItems.map((item, index) => {
               const Icon = item.icon;
               const isActive = activeIndex === index;
+              const theme = timelineThemes[index % timelineThemes.length];
+
+              const timelineStyle = {
+                '--timeline-accent': theme.accent,
+                '--timeline-soft': theme.accentSoft,
+                '--timeline-border': theme.accentBorder,
+                '--timeline-glow': theme.accentGlow,
+              } as CSSProperties;
 
               return (
-                <motion.div
+                <motion.button
                   key={item.year}
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: index * 0.12 }}
+                  className="group row-[1/4] flex w-full flex-col items-center text-left"
+                  style={{
+                    ...timelineStyle,
+                    gridColumn: index + 2,
+                  }}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setActiveIndex(index)}
-                    className="group block w-full text-left"
-                  >
-                    <div
-                      className={`relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br ${item.color} shadow-[0_0_35px_rgba(139,92,246,0.35)] transition group-hover:scale-110`}
-                    >
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-950/65">
-                        <span className="h-2.5 w-2.5 rounded-full bg-white" />
-                      </span>
-                    </div>
-
-                    <p className="mt-3 text-sm font-black text-white/70">{item.year}</p>
+                  <div className="relative z-10 flex h-[72px] w-full items-center justify-center">
+                    <div className="timeline-marker-glow" />
 
                     <div
-                      className={`glass-card mt-5 min-h-[190px] rounded-3xl p-6 transition duration-300 ${
-                        isActive
-                          ? 'translate-y-[-4px] border-white/25 bg-white/[0.1]'
-                          : 'opacity-75 hover:opacity-100'
+                      className={`timeline-marker ${
+                        isActive ? 'timeline-marker--active' : ''
                       }`}
                     >
-                      <div
-                        className={`mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${item.color}`}
-                      >
-                        <Icon size={23} />
-                      </div>
-
-                      <h3 className="text-lg font-black leading-snug">{item.title}</h3>
-                      <p className="mt-3 text-sm leading-6 text-white/58">
-                        {item.description}
-                      </p>
+                      <span className="timeline-marker-inner">
+                        <span className="timeline-marker-dot" />
+                      </span>
                     </div>
-                  </button>
-                </motion.div>
+                  </div>
+
+                  <p
+                    className="mt-2 w-full max-w-[320px] text-left text-sm font-black"
+                    style={{ color: theme.accent }}
+                  >
+                    {item.year}
+                  </p>
+
+                  <div
+                    className={`timeline-card mt-5 w-full max-w-[320px] min-h-[225px] rounded-3xl p-6 transition duration-300 ${
+                      isActive
+                        ? 'translate-y-[-4px] opacity-100'
+                        : 'opacity-75 hover:translate-y-[-3px] hover:opacity-100'
+                    }`}
+                  >
+                    <div
+                      className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl"
+                      style={{
+                        background: theme.accentSoft,
+                        border: `1px solid ${theme.accentBorder}`,
+                        color: theme.accent,
+                        boxShadow: `0 0 26px ${theme.accentGlow}`,
+                      }}
+                    >
+                      <Icon size={23} />
+                    </div>
+
+                    <h3 className="text-lg font-black leading-snug text-white">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-7 text-white/58">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.button>
               );
             })}
           </div>
         </div>
+
+{/* MOBILE / TABLET */}
+<div className="mt-12 lg:hidden">
+  <div className="timeline-mobile-desktop-like relative">
+    <span className="timeline-mobile-end timeline-mobile-end--top" />
+    <span className="timeline-mobile-end timeline-mobile-end--bottom" />
+
+    {timelineItems.map((item, index) => {
+      const Icon = item.icon;
+      const isActive = activeIndex === index;
+      const theme = timelineThemes[index % timelineThemes.length];
+
+      const timelineStyle = {
+        '--timeline-accent': theme.accent,
+        '--timeline-soft': theme.accentSoft,
+        '--timeline-border': theme.accentBorder,
+        '--timeline-glow': theme.accentGlow,
+      } as CSSProperties;
+
+      return (
+        <motion.button
+          key={item.year}
+          type="button"
+          onClick={() => setActiveIndex(index)}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, delay: index * 0.12 }}
+          className="timeline-mobile-desktop-like-item group relative grid w-full grid-cols-[64px_1fr] gap-x-5 text-left"
+          style={timelineStyle}
+        >
+          <div className="relative z-10 flex justify-center">
+            <div className="relative flex h-16 w-16 items-center justify-center">
+              <div className="timeline-marker-glow" />
+
+              <div
+                className={`timeline-marker ${
+                  isActive ? 'timeline-marker--active' : ''
+                }`}
+              >
+                <span className="timeline-marker-inner">
+                  <span className="timeline-marker-dot" />
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p
+              className="pt-4 text-sm font-black"
+              style={{ color: theme.accent }}
+            >
+              {item.year}
+            </p>
+
+            <div
+              className={`timeline-card mt-4 w-full rounded-3xl p-6 transition duration-300 ${
+                isActive
+                  ? 'translate-y-[-4px] opacity-100'
+                  : 'opacity-75 hover:translate-y-[-3px] hover:opacity-100'
+              }`}
+            >
+              <div
+                className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl"
+                style={{
+                  background: theme.accentSoft,
+                  border: `1px solid ${theme.accentBorder}`,
+                  color: theme.accent,
+                  boxShadow: `0 0 26px ${theme.accentGlow}`,
+                }}
+              >
+                <Icon size={23} />
+              </div>
+
+              <h3 className="text-lg font-black leading-snug text-white">
+                {item.title}
+              </h3>
+
+              <p className="mt-3 text-sm leading-7 text-white/58">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        </motion.button>
+      );
+    })}
+  </div>
+</div>
       </div>
     </section>
   );

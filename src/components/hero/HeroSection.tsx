@@ -5,27 +5,24 @@ import rightHeroSection from '../../assets/images/right-hero-section-transparent
 export function HeroSection() {
   return (
     <section
-    id="home"
-    className="hero-grid-bg relative min-h-screen overflow-hidden border-b border-white/8 pt-24 lg:min-h-[760px] lg:pt-20"
+      id="home"
+      className="section-screen hero-grid-bg relative overflow-hidden border-b border-white/8"
     >
       <div className="hero-local-bg pointer-events-none absolute inset-0" />
       <div className="hero-bottom-fade pointer-events-none absolute inset-x-0 bottom-0 h-32 lg:h-40" />
 
       <div
-      className="
-      section-shell
-      relative
-      z-10
-      grid
-      min-h-[calc(100vh-96px)]
-      items-center
-      gap-6
-      pb-14
-      lg:min-h-[680px]
-      lg:grid-cols-[0.88fr_1.12fr]
-      lg:gap-8
-      lg:pb-0
-      "
+        className="
+          section-shell
+          section-screen-inner
+          relative
+          z-10
+          grid
+          items-center
+          gap-8
+          lg:grid-cols-[0.88fr_1.12fr]
+          lg:gap-8
+        "
       >
         <motion.div
           initial={{ opacity: 0, y: 26 }}
@@ -72,18 +69,18 @@ export function HeroSection() {
           </h1>
 
           <p
-          className="
-          mx-auto
-          mt-6
-          max-w-[560px]
-          text-sm
-          leading-7
-          text-white/68
-          sm:text-base
-          lg:mx-0
-          xl:text-lg
-          xl:leading-8
-          "
+            className="
+              mx-auto
+              mt-6
+              max-w-[560px]
+              text-sm
+              leading-7
+              text-white/68
+              sm:text-base
+              lg:mx-0
+              xl:text-lg
+              xl:leading-8
+            "
           >
             I craft beautiful, fast and accessible web experiences. Frontend Developer today,
             Fullstack Builder tomorrow. I love turning ideas into scalable solutions.
@@ -108,46 +105,44 @@ export function HeroSection() {
           className="
             relative
             z-10
-            mt-2
             flex
-            min-h-[220px]
+            min-h-[260px]
             w-full
             items-center
             justify-center
-            sm:min-h-[290px]
-            md:min-h-[340px]
-            lg:mt-0
-            lg:min-h-[400px]
+            sm:min-h-[330px]
+            md:min-h-[390px]
+            lg:min-h-[520px]
           "
         >
           <div className="hero-image-glow bottom-[18%] right-[12%] hidden lg:block" />
 
           <img
-          src={rightHeroSection}
-          alt="Cezar portfolio hero"
-          draggable={false}
-          className="
-          pointer-events-none
-          relative
-          z-10
-          w-[350px]
-          max-w-[108%]
-          select-none
-          object-contain
-          drop-shadow-[0_0_40px_rgba(34,211,238,0.14)]
-          sm:w-[430px]
-          md:w-[520px]
-          lg:absolute
-          lg:left-[20px]
-          lg:top-1/2
-          lg:w-[650px]
-          lg:max-w-none
-          lg:-translate-y-1/2
-          xl:left-[40px]
-          xl:w-[710px]
-          2xl:left-[70px]
-          2xl:w-[750px]
-          "
+            src={rightHeroSection}
+            alt="Cezar portfolio hero"
+            draggable={false}
+            className="
+              pointer-events-none
+              relative
+              z-10
+              w-[350px]
+              max-w-[108%]
+              select-none
+              object-contain
+              drop-shadow-[0_0_40px_rgba(34,211,238,0.14)]
+              sm:w-[430px]
+              md:w-[520px]
+              lg:absolute
+              lg:left-[20px]
+              lg:top-1/2
+              lg:w-[650px]
+              lg:max-w-none
+              lg:-translate-y-1/2
+              xl:left-[40px]
+              xl:w-[710px]
+              2xl:left-[70px]
+              2xl:w-[750px]
+            "
           />
         </motion.div>
       </div>

@@ -4,8 +4,8 @@ import { projects } from '../../data/projects';
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="border-y border-white/8 bg-black/20 py-24">
-      <div className="section-shell">
+    <section id="projects" className="section-screen border-b border-white/8">
+      <div className="section-shell section-screen-inner">
         <div className="text-center">
           <p className="text-sm font-black uppercase tracking-[0.36em] text-fuchsia-300">
             Featured Work
