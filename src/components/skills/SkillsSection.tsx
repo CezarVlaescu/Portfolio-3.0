@@ -1,6 +1,6 @@
 import { type CSSProperties } from 'react';
 import { motion } from 'motion/react';
-import { Trophy } from 'lucide-react';
+import { Code2, Sparkles, Trophy } from 'lucide-react';
 import { hardSkills, serviceCards, softSkills } from '../../data/skills';
 import skillsPortrait from '../../assets/images/signature-card.png';
 
@@ -170,50 +170,46 @@ export function SkillsSection() {
             </div>
 
             <div
-              className="skill-info-card rounded-3xl p-6"
-              style={
-                {
-                  '--skill-accent': infoThemes.hard.accent,
-                  '--skill-soft': infoThemes.hard.soft,
-                  '--skill-border': infoThemes.hard.border,
-                  '--skill-glow': infoThemes.hard.glow,
-                } as CSSProperties
-              }
+            className="skill-info-card rounded-3xl p-6"
+            style={
+              { 
+                '--skill-accent': infoThemes.hard.accent, 
+                '--skill-soft': infoThemes.hard.soft, 
+                '--skill-border': infoThemes.hard.border, 
+                '--skill-glow': infoThemes.hard.glow 
+              } as CSSProperties
+            }
             >
-              <h3 className="text-xl font-black text-[var(--skill-accent)]">
-                Hard Skills
-              </h3>
-
+              <div className="flex items-center gap-3">
+                <Code2 size={24} className="text-[var(--skill-accent)]" />
+                <h3 className="text-xl font-black text-[var(--skill-accent)]">
+                  Hard Skills
+                </h3>
+              </div>
+              
               <div className="mt-5 flex flex-wrap gap-2">
-                {hardSkills.map((skill) => (
-                  <span key={skill} className="skill-pill">
-                    {skill}
-                  </span>
-                ))}
+                {hardSkills.map((skill) => ( <span key={skill} className="skill-pill">{skill}</span>))}
               </div>
             </div>
 
             <div
-              className="skill-info-card rounded-3xl p-6"
-              style={
-                {
-                  '--skill-accent': infoThemes.soft.accent,
-                  '--skill-soft': infoThemes.soft.soft,
-                  '--skill-border': infoThemes.soft.border,
-                  '--skill-glow': infoThemes.soft.glow,
-                } as CSSProperties
-              }
+            className="skill-info-card rounded-3xl p-6"
+            style={
+              {
+                '--skill-accent': infoThemes.soft.accent,
+                '--skill-soft': infoThemes.soft.soft,
+                '--skill-border': infoThemes.soft.border,
+                '--skill-glow': infoThemes.soft.glow,
+              } as CSSProperties
+            }
             >
-              <h3 className="text-xl font-black text-[var(--skill-accent)]">
-                Soft Skills
-              </h3>
+              <div className="flex items-center gap-3">
+                <Sparkles size={24} className="text-[var(--skill-accent)]" />
+                <h3 className="text-xl font-black text-[var(--skill-accent)]">Soft Skills</h3>
+              </div>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {softSkills.map((skill) => (
-                  <span key={skill} className="skill-pill">
-                    {skill}
-                  </span>
-                ))}
+                {softSkills.map((skill) => (<span key={skill} className="skill-pill">{skill}</span>))}
               </div>
             </div>
           </div>
